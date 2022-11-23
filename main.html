@@ -182,10 +182,9 @@ Notes:
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js'></script>
-
 <script src='https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js'></script>
+<script src="https://cdn.jsdelivr.net/gh/Dddatt/bss/music_gunFires.js"></script>
 
 <script id='static_geometry_vsh' type='GLSL3D'>
 
@@ -1090,6 +1089,119 @@ gl.enable(gl.DEPTH_TEST)
 gl.depthFunc(gl.LEQUAL)
 gl.enable(gl.CULL_FACE)
 gl.cullFace(gl.BACK)
+
+let audio_ctx=new AudioContext(),soundCache={}
+
+function dataURItoBlob(dataURI) {
+	
+	let byteString=atob(dataURI.split(',')[1]),
+	    mimeString=dataURI.split(',')[0].split(':')[1].split(';')[0],
+	    ab=new ArrayBuffer(byteString.length),
+	    ia=new Uint8Array(ab)
+	
+	for(let i=0;i<byteString.length;i++){
+        
+        ia[i]=byteString.charCodeAt(i)
+	}
+	
+	return new Blob([ab],{type:mimeString})
+}
+
+function resample(sourceAudioBuffer,desiredSampleRate,resolve){
+    
+	let offlineCtx=new OfflineAudioContext(sourceAudioBuffer.numberOfChannels,sourceAudioBuffer.duration*desiredSampleRate,desiredSampleRate),
+	cloneBuffer=offlineCtx.createBuffer(sourceAudioBuffer.numberOfChannels,sourceAudioBuffer.length,sourceAudioBuffer.sampleRate)
+	
+	for(let channel=0;channel<sourceAudioBuffer.numberOfChannels;channel++){
+	   
+        cloneBuffer.copyToChannel(sourceAudioBuffer.getChannelData(channel),channel)
+	}
+	
+	let source=offlineCtx.createBufferSource()
+	
+	source.buffer=cloneBuffer
+	source.connect(offlineCtx.destination)
+	
+	offlineCtx.oncomplete=e=>resolve(e.renderedBuffer)
+	offlineCtx.startRendering()
+	
+	source.start(0)
+}
+
+function playSound(sound,vol) {
+	
+	let src=window['music_'+sound]
+	
+	let SAMPLE_RATE=16000
+	
+	if(!soundCache['blob_'+sound]){
+	    
+	    soundCache['blob_'+sound]=dataURItoBlob(src)
+	}
+	
+	let audioBufferPromise=new Promise(resolve=>soundCache['blob_'+sound].arrayBuffer().then(arrBuffer=>audio_ctx.decodeAudioData(arrBuffer,resolve)))
+	
+	audioBufferPromise.then(buffer=>new Promise(resolve=>soundCache['resampled_'+sound]||(function(){soundCache['resampled_'+sound]=resample(buffer,SAMPLE_RATE,resolve);return soundCache['resampled_'+sound]})())).then(buffer=>{
+	    
+		let phase=200,skipLength=5.25,freq=1/(phase*MATH.TWO_PI)
+		
+		if(!soundCache['channelData_'+sound]){
+		    
+		    soundCache['channelData_'+sound]=buffer.getChannelData(0)
+		}
+		
+		let channelData=soundCache['channelData_'+sound]
+		
+		let pcm=new Float32Array(SAMPLE_RATE*phase*2)
+		
+		let numSeconds=channelData.length/SAMPLE_RATE
+
+		let gain=audio_ctx.createGain()
+		gain.connect(audio_ctx.destination)
+	    
+		gain.gain.value=vol
+		
+		for (let i=0,j=0;i<numSeconds;i+=skipLength,j++){
+		    
+			let start=SAMPLE_RATE*i,end=SAMPLE_RATE*(i+phase)
+            
+			pcm.set(channelData.subarray(start|0,end|0),SAMPLE_RATE*phase)
+			
+			if(!soundCache['wave'+j+'_'+sound]){
+			    
+				let waveShaper=audio_ctx.createWaveShaper()
+				let oscA=audio_ctx.createOscillator()
+				
+				oscA.connect(waveShaper)
+    			waveShaper.connect(gain)
+				
+				waveShaper.curve=pcm
+				
+				soundCache['wave'+j+'_'+sound]=waveShaper
+				
+				oscA.frequency.value=freq
+				
+				oscA.start(i+audio_ctx.currentTime)
+				oscA.stop(i+skipLength+audio_ctx.currentTime)
+				soundCache['osc'+j+'_'+sound]=oscA
+				
+			} else {
+			    
+			    soundCache['osc'+j+'_'+sound].disconnect(soundCache['wave'+j+'_'+sound])
+			    
+				let oscA=audio_ctx.createOscillator()
+				
+				oscA.connect(soundCache['wave'+j+'_'+sound])
+				
+				oscA.frequency.value=freq
+				
+				oscA.start(i+audio_ctx.currentTime)
+				oscA.stop(i+skipLength+audio_ctx.currentTime)
+				soundCache['osc'+j+'_'+sound]=oscA
+			}
+		}
+	})
+}
 
 ctx.shadowOffsetX=0
 ctx.shadowOffsetY=0
@@ -3114,6 +3226,7 @@ let weapons=(function(out){
         
         out.shoot=function(x,y,z,yaw,pitch,dx,dy,dz,isPlayer,enemyFrom){
             
+		playSound('gunFires',0.8)
             player.addSound('Gun fires',isPlayer?false:[x,y,z],false,20)
             
             if(dx){
