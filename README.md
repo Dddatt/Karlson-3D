@@ -1,4 +1,5 @@
 # Karlson-3D
-Khan Academy Karlson 3D remake
+A remake of Dani's Karlson 3D, hosted on KA
+This repo is a backup sorta
 
 KA link: https://www.khanacademy.org/computer-programming/karlson-3d/6419382501687296
