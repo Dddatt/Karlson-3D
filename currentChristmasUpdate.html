@@ -1,24 +1,7 @@
-<!DOCTYPE html><html><!--
+<!DOCTYPE html><html>
 
-So...now, presenting Karlson 3D!!!
 
-Original game(the 1st, older version) by Dani(the YT devlogs are an epic source of info)
-
-This game is like Karlson(1st and older version) with Billy, extra weapons, extra levels, extra features, extra post-processing, a bit of redesigned stuff, and extra performance(surprising given the horrendous amount of GPU shaders)!
-
-This game allows for saving and playing custom levels!
-
-3 months ago it accidentally went on the HL so then there was random people stalking lol
-
-MASSIVE thanks to HB_the_Pencil, Kev, Lemon Games, Galaxy Ranger, ski, for helping me playtest, bugfinding, level creating, and ideas!!!
-
-Thanks to the random people that played my game! I don't remember a lot, but there but there was VEXCESS, JSCoder, and too many others(about 25)!
-
-HUGE thanks to VEXCESS for the fullscreen stuff(he didn't help me I helped myself after finding his KA Project Viewer lol) but sadly now broke, so come back vexcess and use 1 of ur alts to help me pls!
-
-Levels 6,7, and 18 are made by Galaxy Ranger!!
-
-How to use the level creator:--><script>
+<!--How to use the level creator:--><script>
 
 // RESTARTING THE PROGRAM DELETES THE LEVEL YOU'VE WORKED ON
 
@@ -83,6 +66,21 @@ How to use the level creator:--><script>
 
 </script><!--
 
+
+
+Welcome to KA Karlson 3D's Christmas Edition!
+
+Original game(the 1st, older version) by Dani(the YT devlogs are an epic source of info)
+
+This game is like Karlson(1st and older version) with Billy, extra weapons, extra levels, extra features, extra post-processing, a bit of redesigned stuff, and extra performance(surprising given the horrendous amount of GPU shaders)!
+
+This game allows for saving and playing custom levels!
+
+MASSIVE thanks to HB_the_Pencil, Kev, Lemon Games, Galaxy Ranger, ski, for helping me playtest, bugfinding, level creating, and ideas!!!
+
+Levels 6,7, and 18 are made by Galaxy Ranger!!
+
+
 Cool things this game has, and all done without a game engine(cough cough dani, and also in html so extra points 4 me :D) and runs at 60+ FPS:
 
 -FXAA
@@ -111,7 +109,7 @@ IDK where the 2nd one went
 
 
 
-<title>Karlson [3D]</title>
+<title>Karlson [3D]: Christmas!</title>
 
 <canvas id='gl-canvas'></canvas>
 <canvas id='ui-canvas'></canvas>
@@ -992,16 +990,58 @@ IDK where the 2nd one went
 
 <div class="page">
     
-    <header style='margin-left:90px;margin-bottom:40px;font-size:35px;'>Play in Fullscreen? (broke)</header>
-    <p>Size or resolution of your screen</p>
-    <input id='screenWidth' type='text' size='20' spellcheck='false' placeholder='Width'>
-    <span style='margin:10px;display:block'></span>
-    <input id='screenHeight' type='text' size='20' spellcheck='false' placeholder='Height'>
-    <span style='display:block;margin-top:10px;'></span>
-    <button id='runFullScreen'>Run</button>
-    <span style='display:block;margin-top:50px;'></span>
-    <button id='noFullScreen' style='margin-left:170px;width:200px;height:50px;'>No,thanks...</button>
-    <p>look at the code and scroll down a bit for the level creator instructions<br><br><br>newest news: ka api no longer works after around 12 pm 12/5/22 est, so more fullscreen. working on a fix but don't expect it *shrugs*</p>
+    
+    <!--<p>Size or resolution of your screen</p>-->
+    <!--<input id='screenWidth' type='text' size='20' spellcheck='false' placeholder='Width'>-->
+    <!--<span style='margin:10px;display:block'></span>-->
+    <!--<input id='screenHeight' type='text' size='20' spellcheck='false' placeholder='Height'>-->
+    <!--<span style='display:block;margin-top:10px;'></span>-->
+    <button id='runFullScreen' style='display:none'>Run</button>
+    <!--<span style='display:block;margin-top:50px;'></span>-->
+    
+    <svg style='width:600px;height:100px'>
+        
+        <defs>
+            
+            <linearGradient id='stripe' x1='0' y1='0' x2='1' y2='0.1'>
+                
+                <stop offset='0%' stop-color='white'></stop>
+                <stop offset='9.5%' stop-color='white'></stop>
+                <stop offset='10.5%' stop-color='red'></stop>
+                <stop offset='19.5%' stop-color='red'></stop>
+                <stop offset='21.5%' stop-color='white'></stop>
+                <stop offset='29.5%' stop-color='white'></stop>
+                <stop offset='30.5%' stop-color='red'></stop>
+                <stop offset='39.5%' stop-color='red'></stop>
+                <stop offset='41.5%' stop-color='white'></stop>
+                <stop offset='49.5%' stop-color='white'></stop>
+                <stop offset='50.5%' stop-color='red'></stop>
+                <stop offset='59.5%' stop-color='red'></stop>
+                <stop offset='61.5%' stop-color='white'></stop>
+                <stop offset='69.5%' stop-color='white'></stop>
+                <stop offset='70.5%' stop-color='red'></stop>
+                <stop offset='79.5%' stop-color='red'></stop>
+                <stop offset='81.5%' stop-color='white'></stop>
+                <stop offset='89.5%' stop-color='white'></stop>
+                <stop offset='90.5%' stop-color='red'></stop>
+                <stop offset='99.5%' stop-color='red'></stop>
+                <stop offset='100.5%' stop-color='white'></stop>
+                
+            </linearGradient>
+            
+        </defs>
+        
+        <text style='font-family:cursive;font-size:50px;' fill='url(#stripe)' x='285' y='50' text-anchor='middle'>Christmas Update!</text>
+        
+    </svg>
+    
+    <p style='font-size:20px;'>Karlson 3D's first update is here: The Christmas Update!</p>
+    <p style='font-size:16px;'>New additions:<br><br>- All levels now have snow and a winter environment!<br>- Enemies and your friend Billy now have a Santa Hat!<br>- Enemies now drop their new Santa Hats as physics objects!<br>- A more festively recolored milk cartoon!<br>- The Candycane Shank is buffed, now with more reach and now can be thrown like a spear!<br>- Removed fullscreen due to the new KA API, may be making a return soon!
+    </p>
+    
+    <button id='noFullScreen' style='margin-top:60px;margin-left:170px;width:200px;height:50px;font-size:30px;font-family:trebuchet ms'>Play!</button>
+    
+    <p></p>
     
 </div>
 
@@ -1127,7 +1167,7 @@ ctx.shadowBlur=9
 let superSecretShaders=[
     
     `#version 300 es
-    precision lowp float; in vec2 pixTexCoord; uniform float time; uniform sampler2D ogTex; uniform sampler2D bloomTex; uniform sampler2D sunrayTex; uniform sampler2D infoTex; uniform sampler2D ssaoTex; out vec4 fragColor; void main(){fragColor=vec4(mix((texture(ogTex,pixTexCoord).rgb+texture(bloomTex,pixTexCoord).rgb+texture(sunrayTex,pixTexCoord).rgb+texture(infoTex,pixTexCoord).ggg)*(1.0-texture(ssaoTex,pixTexCoord).rgb),vec3(0.975),min(texture(infoTex,pixTexCoord).b*2.5,1.0)),1); }`,
+    precision lowp float; in vec2 pixTexCoord; uniform float time; uniform sampler2D ogTex; uniform sampler2D bloomTex; uniform sampler2D sunrayTex; uniform sampler2D infoTex; uniform sampler2D ssaoTex; out vec4 fragColor; void main(){fragColor=vec4(mix((texture(ogTex,pixTexCoord).rgb+texture(bloomTex,pixTexCoord).rgb+texture(sunrayTex,pixTexCoord).rgb+texture(infoTex,pixTexCoord).ggg)*(1.0-texture(ssaoTex,pixTexCoord).rgb),vec3(0.975),min(texture(infoTex,pixTexCoord).b*3.0,0.85)),1); }`,
     
     `#version 300 es
     precision lowp float; in vec2 pixTexCoord; uniform float time; uniform sampler2D ogTex; uniform sampler2D bloomTex; uniform sampler2D sunrayTex; uniform sampler2D infoTex; uniform sampler2D ssaoTex; out vec4 fragColor; void main(){ fragColor=vec4(1.0-texture(ssaoTex,pixTexCoord).rgb,1); }`,
@@ -2225,10 +2265,10 @@ let meshes=(function(out){
     out.milk={}
     out.milk.verts=[]
     out.milk.index=[]
-    m=createBoxMesh(0,0,0,0.8,1.5,0.8,0.1,0.6,1,0)
+    m=createBoxMesh(0,0,0,0.8,1.5,0.8,1,0.1,0.1,0)
     out.milk.verts.push(...m.verts)
     out.milk.index.push(...m.index)
-    m=createBoxMesh(0,0.75,0,Math.SQRT1_2*0.8,Math.SQRT1_2*0.8,0.8,0.1,0.6,1,out.milk.verts.length/9,0,0,45)
+    m=createBoxMesh(0,0.75,0,Math.SQRT1_2*0.8,Math.SQRT1_2*0.8,0.8,1,0.1,0.1,out.milk.verts.length/9,0,0,45)
     out.milk.verts.push(...m.verts)
     out.milk.index.push(...m.index)
     m=createBoxMesh(0,0.1,0,0.805,0.45,0.805,1,1,1,out.milk.verts.length/9)
@@ -2292,6 +2332,17 @@ let meshes=(function(out){
     m=createBoxMesh(0.4,-0.7,0,0.4,1.5,0.4,r,g,b,out.enemy.verts.length/9,0,25,0)
     out.enemy.verts.push(...(m.verts))
     out.enemy.index.push(...(m.index))
+    
+    m=createCylinderMesh(0,1.15*0.5+0.501+1.5,0,0,1,15,1,0,0,out.enemy.verts.length/9,-90,0,0,0.65)
+    out.enemy.verts.push(...(m.verts))
+    out.enemy.index.push(...(m.index))
+    m=createCylinderMesh(0,1.15*0.5+0.075+1.5,0,0.7,0.15,15,1,1,1,out.enemy.verts.length/9,-90,0,0,0.7)
+    out.enemy.verts.push(...(m.verts))
+    out.enemy.index.push(...(m.index))
+    m=createSphereMesh(0,1.15*0.5+1+1.5,0,0.2,2,1,1,1,out.enemy.verts.length/9)
+    out.enemy.verts.push(...(m.verts))
+    out.enemy.index.push(...(m.index))
+    
     bindAndSetMeshBuffers(out.enemy)
     
     
@@ -2319,7 +2370,32 @@ let meshes=(function(out){
     m=createBoxMesh(0.4,-0.7,0.8,0.4,1.5,0.4,r,g,b,out.enemy_running.verts.length/9,-30,0,0)
     out.enemy_running.verts.push(...(m.verts))
     out.enemy_running.index.push(...(m.index))
+    
+    m=createCylinderMesh(0,1.15*0.5+0.501+1,-0.75,0,1,15,1,0,0,out.enemy_running.verts.length/9,-90,0,0,0.65)
+    out.enemy_running.verts.push(...(m.verts))
+    out.enemy_running.index.push(...(m.index))
+    m=createCylinderMesh(0,1.15*0.5+0.075+1,-0.75,0.7,0.15,15,1,1,1,out.enemy_running.verts.length/9,-90,0,0,0.7)
+    out.enemy_running.verts.push(...(m.verts))
+    out.enemy_running.index.push(...(m.index))
+    m=createSphereMesh(0,1.15*0.5+1+1,-0.75,0.2,2,1,1,1,out.enemy_running.verts.length/9)
+    out.enemy_running.verts.push(...(m.verts))
+    out.enemy_running.index.push(...(m.index))
+    
     bindAndSetMeshBuffers(out.enemy_running)
+    
+    out.santaHat={}
+    out.santaHat.verts=[]
+    out.santaHat.index=[]
+    m=createCylinderMesh(0,0.501-0.5,0,0,1,15,1,0,0,out.santaHat.verts.length/9,-90,0,0,0.65)
+    out.santaHat.verts.push(...(m.verts))
+    out.santaHat.index.push(...(m.index))
+    m=createCylinderMesh(0,0.075-0.5,0,0.7,0.15,15,1,1,1,out.santaHat.verts.length/9,-90,0,0,0.7)
+    out.santaHat.verts.push(...(m.verts))
+    out.santaHat.index.push(...(m.index))
+    m=createSphereMesh(0,0.5,0,0.2,2,1,1,1,out.santaHat.verts.length/9)
+    out.santaHat.verts.push(...(m.verts))
+    out.santaHat.index.push(...(m.index))
+    bindAndSetMeshBuffers(out.santaHat)
     
     out.barrel={}
     out.barrel.verts=[]
@@ -3109,7 +3185,7 @@ let player=(function(out){
             if(player.currentWeapon==='reverse' && weapons.reverse.active===false || player.currentWeapon!=='reverse'){
                 
                 out.pickUpCoolDown=4
-                physicsObjects.add(new PhysicsWeapon({pos:[out.body.position.x+out.lookDir[0]*2,out.body.position.y+out.height+out.lookDir[1]*2,out.body.position.z+out.lookDir[2]*2],type:out.currentWeapon,vel:out.lookDir,fromPlayer:true}))
+                physicsObjects.add(new PhysicsWeapon({pos:[out.body.position.x+out.lookDir[0]*2,out.body.position.y+out.height+out.lookDir[1]*2,out.body.position.z+out.lookDir[2]*2],type:out.currentWeapon,vel:vec3.scale([],out.lookDir,out.currentWeapon==='candycane'?4:1),fromPlayer:true,rot:out.currentWeapon==='candycane'?[out.pitch*MATH.TO_DEG,out.yaw*MATH.TO_DEG,0]:false}))
                 out.currentWeapon='hand'
             }
         }
@@ -3719,7 +3795,7 @@ let weapons=(function(out){
                 
                 out.coolDown=weapons.candycane_coolDown
                 
-                let result=new CANNON.RaycastResult(),x=player.body.position.x,y=player.body.position.y,z=player.body.position.z,r=8,
+                let result=new CANNON.RaycastResult(),x=player.body.position.x,y=player.body.position.y,z=player.body.position.z,r=10,
                 from=new CANNON.Vec3(x,y+player.height,z),
                 to=new CANNON.Vec3(x+player.lookDir[0]*r,y+player.height+player.lookDir[1]*r,z+player.lookDir[2]*r)
                 
@@ -4768,6 +4844,8 @@ let physicsObjects={
         
         physicsObjects.constraints.push(rightHip,leftHip,rightShoulder,leftShoulder,neck)
         
+        physicsObjects.add(new PhysicsSantaHat({pos:[pos[0],pos[1]+headRad+torsoSize*0.5+1,pos[2]]}))
+        
     }
 }
 
@@ -4923,6 +5001,42 @@ class PhysicsBilly {
         gl.uniformMatrix4fv(glCache.dynamic_modelMatrix,gl.FALSE,this.matrix)
         
         gl.drawElements(gl.TRIANGLES,this.mesh.indexAmount,gl.UNSIGNED_SHORT,0)
+    }
+}
+
+class PhysicsSantaHat {
+    
+    constructor(params){
+        
+        this.mesh=meshes.santaHat
+        this.size=params.size||[1,1,1]
+        
+        this.body=new CANNON.Body({
+            
+            position:new CANNON.Vec3(params.pos[0],params.pos[1],params.pos[2]),
+            quaternion:new CANNON.Quaternion(...quat.fromEuler([],...(params.rot||[0,0,0]))),
+            mass:params.mass||1,
+            shape:new CANNON.Box(new CANNON.Vec3(this.size[0]*0.5,this.size[1]*0.5,this.size[2]*0.5)),
+            angularDamping:0.5,
+            collisionFilterGroup:DYNAMIC_PHYSICS_GROUP,
+            collisionFilterMask:PLAYER_PHYSICS_GROUP|STATIC_PHYSICS_GROUP|DYNAMIC_PHYSICS_GROUP|ENEMY_PHYSICS_GROUP,
+            material:roughMaterial,
+            sleepSpeedLimit:0.1,
+            sleepTimeLimit:5
+        })
+        
+        physicsWorld.addBody(this.body)
+        
+        this.matrix=new Float32Array(16)
+    }
+    
+    update(){
+        
+        mat4.fromRotationTranslationScale(this.matrix,[this.body.quaternion.x,this.body.quaternion.y,this.body.quaternion.z,this.body.quaternion.w],[this.body.position.x,this.body.position.y,this.body.position.z],this.size)
+        
+        gl.uniformMatrix4fv(glCache.dynamic_modelMatrix,gl.FALSE,this.matrix)
+        
+        gl.drawElements(gl.TRIANGLES,meshes.santaHat.indexAmount,gl.UNSIGNED_SHORT,0)
     }
 }
 
@@ -5353,7 +5467,7 @@ class PhysicsEnemy {
         
         gl.uniformMatrix4fv(glCache.dynamic_modelMatrix,gl.FALSE,this.matrix)
         
-        gl.drawElements(gl.TRIANGLES,meshes.enemy.indexAmount,gl.UNSIGNED_SHORT,0)
+        gl.drawElements(gl.TRIANGLES,this.mesh.indexAmount,gl.UNSIGNED_SHORT,0)
     }
 }
 
@@ -7658,7 +7772,7 @@ for(let i=0,inc=360/20;i<360;i+=inc){
 
 
 
-let skyVertBuffer=gl.createBuffer(),skyIndexBuffer=gl.createBuffer(),b=1000000,skyVerts=[-b,b,0,-b,-b,0,b,-b,0,b,b,0],skyIndex=[0,1,2,2,3,0],l=skyVerts.length/3,skySunDir=[200,100,-750]
+let skyVertBuffer=gl.createBuffer(),skyIndexBuffer=gl.createBuffer(),b=1000000,skyVerts=[-b,b,0,-b,-b,0,b,-b,0,b,b,0],skyIndex=[0,1,2,2,3,0],l=skyVerts.length/3,skySunDir=[200,250,-750]
 
 for(let i=0;i<MATH.TWO_PI;i+=MATH.TWO_PI/20){
     
