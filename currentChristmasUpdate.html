@@ -1,72 +1,6 @@
 <!DOCTYPE html><html>
 
-
-<!--How to use the level creator:--><script>
-
-// RESTARTING THE PROGRAM DELETES THE LEVEL YOU'VE WORKED ON
-
-// INPUTTING AN INVALID CODE CAUSES THE PROGRAM TO CRASH(you have to reset the program again)
-
-// How to use the level creator:
-
-
-// If you would like to edit a saved level, or load a level using data, press "I" while in the level creator and input the code. Note that the level you made before inputting the code will be deleted and changed to the level determined by the code.
-
-
-// To navigate,use the WASD keys. Because the movement is free, the SHIFT and SPACE keys allow you to move up and down. To rotate your camera, position your mouse on the screen(the display part,not the control panel) and drag.
-
-// To select a part to motify,press the select part button. The part hilighted after pressing the button is the part selected. To select a specific part, you may need to press several times. Right clicking selects the parts in backwards order.
-
-// To motify a part, pick something you want to change. If the setting you want to change is a number,hover your mouse over the numbers and press the "O" and "L" keys to increase or decrease. To slow down or speed up the rate of which the numbers change,hold down the "A" or "Z" keys while also pressing the "O" or "L" keys. The "A" key speeds up while the "Z" key slows down. To round the number,press "R". If you want to enable or disable a setting,click on the little box. If you wish to change a type,simply click on the text to change to a new type. To delete a part,click on the delete button located at the lower left corner of the screen.
-
-// To save a level you made,click on the "Save" button at the top left of the screen and make sure to copy the code given.
-
-// To play a saved level(if you have the code),press the "Input Code" button while in the level select screen and paste the code into the input box,then press "Load".
-
-// If you would like to edit a saved level,press "I" while in the level creator and input the code. Note that the level you made before inputting the code will be deleted and changed to the level determined by the code.
-
-// To exit the level creator,press "T". This action saves whatever level you have made.
-
-// The yellow,blue,and red cubes represent the light source,the milk,and the player spawn position. You can move them by setting their positions
-
-
-// PARTICLE SYSTEM:
-
-// First of all: the particles always spawn in the black box randomly. You can see the black box in the level editor but it'll only show if the particle system is selected
-
-
-// The particle system allows for a pretty wide range of things,with just a "few" settings!
-
-// We have: Min Vel X,Max Vel X,Min Vel Y,Max Vel Y,Min Vel Z,Max Vel Z,Min R,Max R,Min G,Max G,Min B,Max B,Min Life,Max Life,Gravity,Min Size,Max Size,Production Rate,and finnaly,Batch Amount
-
-// Min means minimun,and max means maximum. Particles spawned will be in the range of these settings(random numbers between these settings are picked). For example,with a min size of 10 and a max size of 30,particles produced will have a size over 10 and less than 30. Vel means starting velocity,R,G,B means the RGB colors of the particles,and the life is the lifespan of the particles(7.5 lifespan is about 1 sec but idk). The gravity is constant for all particles from the same system,and so is the production rate. The production rate is actually the production delay. For example,a production rate of 10 means that a particle will spawn every 10 frames. A frame is 1/60 of a second,assuming your computer is good enough. Batch amount is basically the amount of particles spawned when the system produces(every production tick). Finally,performance. The game can handle particles very well. like 25 systems each with 6 delay still runs 60 fps on a potato computer!!!
-
-// I honestly expected wayyyyy worse performance
-// Also sadly particles are not affected by physics so they can go through walls and stuffz. Adding this will lower performance dramatically,but they do fly off near an explosion,so they r cool
-
-// Also systems might break if the min value is over the max value but I don't think it'll happen due to the interpolation stuff
-
-// also I cleary quickly ran out of space to put all these settings so now you can click on the giant arrow to go to the next page
-
-// also because the particles use ALOT of the Math.random() functions I'm a bit worried about the function's performance but obviously still way too lazy to check 
-
-
-
-// Notes: 
-
-//     There are limits on how much you can change numbers. For example,The position of a shape can be any number but the rotation angles of a shape are locked to 0-360.
-    
-//     The meshes displayed in the level creator may not represent the actual object(if the object is not a wall). For example,weapons will show up as gray boxes,and spheres show up as regular cubes. These will be displayed normally inside the game.
-    
-//     Because the physics computations are expensive,try to make smaller levels(around 100 walls might lag) and reduce the amount of enemies in them(7 ragdolls causes lag on a potato computer,and ragdolls are made up of 6 blocks).
-
-//     Fun fact: you used to be able to speed up the rate that numbers change in the level creator by using SHIFT and CTRL,but they caused problems because CTRL+O apperantly opens your files and CTRL+L jumps to the search bar, so I changed them 
-
-
-
-</script><!--
-
-
+<!--
 
 Welcome to KA Karlson 3D's Christmas Edition!
 
@@ -107,9 +41,11 @@ IDK where the 2nd one went
 
 -->
 
-<body onload='Karlson()'>
 
 <title>Karlson [3D]: Christmas!</title>
+
+<body onload='Karlson()'>
+
 
 <canvas id='gl-canvas'></canvas>
 <canvas id='ui-canvas'></canvas>
@@ -1041,6 +977,8 @@ IDK where the 2nd one went
     <button id='runFullScreen' style='margin-top:20px;margin-left:170px;width:200px;height:50px;font-size:30px;font-family:trebuchet ms'>Fullscreen!</button>
     
     <button id='noFullScreen' style='margin-top:20px;margin-left:170px;width:200px;height:50px;font-size:30px;font-family:trebuchet ms'>Play!</button>
+    
+    <button id='levelCreatorInstructions' style='margin-top:40px;margin-left:200px;width:150px;height:20px;font-size:10px;font-family:trebuchet ms'>Level Creator Instructions</button>
     
     
     <p></p>
@@ -7024,7 +6962,7 @@ scenes.title=function(){
     ctx.fillStyle='rgb(255,255,255)'
     
     ctx.font='bold 80px trebuchet ms'
-    coolText('Karlson 3D',100,130)
+    coolText('Karlson 3D 🎄',60,130)
     
     if(button(user.mouseX,user.mouseY,70,220,150,75)){
         
@@ -9707,6 +9645,77 @@ document.getElementById('noFullScreen').addEventListener('click',function(){
     
 })
 
+document.getElementById('levelCreatorInstructions').addEventListener('click',function(){
+    
+    let w=window.open()
+    w.document.open()
+    
+    w.document.write(`
+    
+    RESTARTING THE PROGRAM DELETES THE LEVEL YOU'VE WORKED ON<br><br>
+
+INPUTTING AN INVALID CODE CAUSES THE PROGRAM TO CRASH(you have to reset the program again)<br><br>
+
+How to use the level creator:<br><br><br>
+
+
+If you would like to edit a saved level, or load a level using data, press "I" while in the level creator and input the code. Note that the level you made before inputting the code will be deleted and changed to the level determined by the code.<br><br>
+
+To navigate, use the WASD keys. Because the movement is free, the SHIFT and SPACE keys allow you to move up and down. To rotate your camera, position your mouse on the screen(the display part, not the control panel) and drag.<br><br>
+
+To select a part to motify, press the select part button. The part hilighted after pressing the button is the part selected. To select a specific part, you may need to press several times. Right clicking selects the parts in backwards order.<br><br>
+
+To motify a part, pick something you want to change. If the setting you want to change is a number, hover your mouse over the numbers and press the "O" and "L" keys to increase or decrease. To slow down or speed up the rate of which the numbers change, hold down the "A" or "Z" keys while also pressing the "O" or "L" keys. The "A" key speeds up while the "Z" key slows down. To round the number, press "R". If you want to enable or disable a setting, click on the little box. If you wish to change a type, simply click on the text to change to a new type. To delete a part, click on the delete button located at the lower left corner of the screen.<br><br>
+
+To save a level you made, click on the "Save" button at the top left of the screen and make sure to copy the code given.<br><br>
+
+To play a saved level(if you have the code), press the "Input Code" button while in the level select screen and paste the code into the input box, then press "Load".<br><br>
+
+If you would like to edit a saved level, press "I" while in the level creator and input the code. Note that the level you made before inputting the code will be deleted and changed to the level determined by the code.<br><br>
+
+To exit the level creator, press "T". This action saves whatever level you have made.<br><br>
+
+The yellow, blue, and red cubes represent the light source, the milk, and the player spawn position. You can move them by setting their positions<br><br><br>
+
+
+PARTICLE SYSTEM:<br><br>
+
+First of all: the particles always spawn in the black box randomly. You can see the black box in the level editor but it'll only show if the particle system is selected<br><br>
+
+
+The particle system allows for a pretty wide range of things, with just a "few" settings!<br><br>
+
+We have: Min Vel X, Max Vel X, Min Vel Y, Max Vel Y, Min Vel Z, Max Vel Z, Min R, Max R, Min G, Max G, Min B, Max B, Min Life, Max Life, Gravity, Min Size, Max Size, Production Rate, and finnaly, Batch Amount<br><br>
+
+Min means minimun, and max means maximum. Particles spawned will be in the range of these settings(random numbers between these settings are picked). For example, with a min size of 10 and a max size of 30, particles produced will have a size over 10 and less than 30. Vel means starting velocity, R, G, B means the RGB colors of the particles, and the life is the lifespan of the particles(7.5 lifespan is about 1 sec but idk). The gravity is constant for all particles from the same system, and so is the production rate. The production rate is actually the production delay. For example, a production rate of 10 means that a particle will spawn every 10 frames. A frame is 1/60 of a second, assuming your computer is good enough. Batch amount is basically the amount of particles spawned when the system produces(every production tick). Finally, performance. The game can handle particles very well. like 25 systems each with 6 delay still runs 60 fps on a potato computer!!!<br><br>
+
+I honestly expected wayyyyy worse performance<br>
+Also sadly particles are not affected by physics so they can go through walls and stuffz. Adding this will lower performance dramatically, but they do fly off near an explosion, so they r cool<br><br>
+
+Also systems might break if the min value is over the max value but I don't think it'll happen due to the interpolation stuff<br><br>
+
+also I cleary quickly ran out of space to put all these settings so now you can click on the giant arrow to go to the next page<br><br>
+
+also because the particles use ALOT of the Math.random() functions I'm a bit worried about the function's performance but obviously still way too lazy to check <br><br><br><br>
+
+
+
+Notes: <br><br>
+
+    There are limits on how much you can change numbers. For example, The position of a shape can be any number but the rotation angles of a shape are locked to 0-360.<br><br>
+    
+    The meshes displayed in the level creator may not represent the actual object(if the object is not a wall). For example, weapons will show up as gray boxes, and spheres show up as regular cubes. These will be displayed normally inside the game.<br><br>
+    
+    Because the physics computations are expensive, try to make smaller levels(around 100 walls might lag) and reduce the amount of enemies in them(7 ragdolls causes lag on a potato computer, and ragdolls are made up of 6 blocks).<br><br>
+
+    Fun fact: you used to be able to speed up the rate that numbers change in the level creator by using SHIFT and CTRL, but they caused problems because CTRL+O apperantly opens your files and CTRL+L jumps to the search bar, so I changed them <br>
+    
+    `.replace('<br>','<br><br>'))
+    
+    w.document.close()
+    
+})
+
 // if(window.thisProgramIsInFullScreen){
     
 //     ctx.textAlign='start'
@@ -9752,6 +9761,9 @@ loop()
 
 
 </script>
+
+<!--For KA restart button-->
+<script></script>
 
 </body>
 
