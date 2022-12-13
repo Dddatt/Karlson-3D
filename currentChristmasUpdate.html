@@ -107,7 +107,7 @@ IDK where the 2nd one went
 
 -->
 
-
+<body onload='Karlson()'>
 
 <title>Karlson [3D]: Christmas!</title>
 
@@ -121,7 +121,7 @@ IDK where the 2nd one went
         
         margin:0;
         overflow:hidden;
-        font-family:cursive;
+        font-family:trebuchet ms;
     }
     
     #gl-canvas {
@@ -996,7 +996,6 @@ IDK where the 2nd one went
     <!--<span style='margin:10px;display:block'></span>-->
     <!--<input id='screenHeight' type='text' size='20' spellcheck='false' placeholder='Height'>-->
     <!--<span style='display:block;margin-top:10px;'></span>-->
-    <button id='runFullScreen' style='display:none'>Run</button>
     <!--<span style='display:block;margin-top:50px;'></span>-->
     
     <svg style='width:600px;height:100px'>
@@ -1031,15 +1030,18 @@ IDK where the 2nd one went
             
         </defs>
         
-        <text style='font-family:cursive;font-size:50px;' fill='url(#stripe)' x='285' y='50' text-anchor='middle'>Christmas Update!</text>
+        <text style='font-family:trebuchet ms;font-size:50px;' fill='url(#stripe)' x='285' y='50' text-anchor='middle'>Christmas Update!</text>
         
     </svg>
     
     <p style='font-size:20px;'>Karlson 3D's first update is here: The Christmas Update!</p>
-    <p style='font-size:16px;'>New additions:<br><br>- All levels now have snow and a winter environment!<br>- Enemies and your friend Billy now have a Santa Hat!<br>- Enemies now drop their new Santa Hats as physics objects!<br>- A more festively recolored milk cartoon!<br>- The Candycane Shank is buffed, now with more reach and now can be thrown like a spear!<br>- Removed fullscreen due to the new KA API, may be making a return soon!
+    <p style='font-size:16px;'>New additions:<br><br>- All levels now have snow and a winter environment!<br>- Enemies and your friend Billy now have a Santa Hat!<br>- Enemies now drop their new Santa Hats as physics objects!<br>- A more festively recolored milk cartoon!<br>- The Candycane Shank is buffed, now with more reach and now can be thrown like a spear!<br>- Fixed Fullscreen! However, the title screen is now broken when using fullscreen for the first time.
     </p>
     
-    <button id='noFullScreen' style='margin-top:60px;margin-left:170px;width:200px;height:50px;font-size:30px;font-family:trebuchet ms'>Play!</button>
+    <button id='runFullScreen' style='margin-top:20px;margin-left:170px;width:200px;height:50px;font-size:30px;font-family:trebuchet ms'>Fullscreen!</button>
+    
+    <button id='noFullScreen' style='margin-top:20px;margin-left:170px;width:200px;height:50px;font-size:30px;font-family:trebuchet ms'>Play!</button>
+    
     
     <p></p>
     
@@ -1057,72 +1059,7 @@ let Math=_M
 
 let loadLevelDataButton=document.getElementById('runLevelDataCode'),levelDataInput=document.getElementById('levelDataInput'),pages=document.getElementsByClassName('page'),enterLevelDataPage=pages[0],fullScreenPage=pages[1]
 
-let webCode=''
-
-function runForFullScreen(){
-    
-    if(webCode.length>1){
-        
-        let w=window.open()
-        w.document.open()
-        w.document.write(webCode.replaceAll('\u0040','').replaceAll('width=600,height=600','width='+document.getElementById('screenWidth').value+',height='+document.getElementById('screenHeight').value).replace('var _M=Math','var _M=Math\nwindow.thisProgramIsInFullScreen'))
-        w.document.close()
-        
-        webCode=''
-        
-    } else {
-        
-        window.parent.raf=window.requestAnimationFrame(runForFullScreen)
-    }
-}
-    
-document.getElementById('runFullScreen').addEventListener('click',function(){
-    
-    let ID=4693121029947392,w=document.getElementById('screenWidth').value,h=document.getElementById('screenHeight').value,nums='0123456789'
-    
-    for(let i in w.toString()){
-        
-        if(!nums.includes(w[i])){
-            
-            w=false
-            break
-        }
-    }
-    
-    for(let i in h.toString()){
-        
-        if(!nums.includes(h[i])){
-            
-            h=false
-            break
-        }
-    }
-    
-    if(!Number(w)||!Number(h)){
-        
-        alert('Screen size is not valid!')
-        return
-    }
-    
-    $.getJSON("https://www.khanacademy.org/api/labs/scratchpads/"+ID+"?callback=?",function(data){
-        
-      webCode=data.revision.code;
-      
-    })
-    
-    runForFullScreen()
-})
-
-document.getElementById('noFullScreen').addEventListener('click',function(){
-    
-    ctx.textAlign='start'
-    fullScreenPage.style.display='none'
-    currentScene='title'
-    initTitleScreen()
-    
-})
-
-let width=600,height=600,aspect=width/height,half_width=width*0.5,half_height=height*0.5
+let width=window.innerWidth,height=window.innerHeight,aspect=width/height,half_width=width*0.5,half_height=height*0.5
 
 let glCanvas=document.getElementById('gl-canvas')
 let uiCanvas=document.getElementById('ui-canvas')
@@ -1461,7 +1398,6 @@ gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER,gl.COLOR_ATTACHMENT1,gl.TEXTURE_2D,o
 gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER,gl.COLOR_ATTACHMENT2,gl.TEXTURE_2D,og_tex_normal,0)
 
 gl.drawBuffers([gl.COLOR_ATTACHMENT0,gl.COLOR_ATTACHMENT1,gl.COLOR_ATTACHMENT2])
-
 
 gl.bindFramebuffer(gl.FRAMEBUFFER,null)
 
@@ -6827,7 +6763,7 @@ function setLevel(level){
     
     ParticleRenderer.particles=[]
     
-    ctx.font='20px cursive'
+    ctx.font='20px trebuchet ms'
     
     if(levels[level].billyPos){
             
@@ -7087,7 +7023,7 @@ scenes.title=function(){
     ctx.strokeStyle='rgb(255,0,0)'
     ctx.fillStyle='rgb(255,255,255)'
     
-    ctx.font='bold 80px cursive'
+    ctx.font='bold 80px trebuchet ms'
     coolText('Karlson 3D',100,130)
     
     if(button(user.mouseX,user.mouseY,70,220,150,75)){
@@ -7102,12 +7038,12 @@ scenes.title=function(){
         }
     }
     ctx.lineWidth=3
-    ctx.font='bold 55px cursive'
+    ctx.font='bold 55px trebuchet ms'
     coolText('Play',90,270)
     
     ctx.fillStyle='rgb(255,255,255)'
     ctx.lineWidth=2
-    ctx.font='bold 40px cursive'
+    ctx.font='bold 40px trebuchet ms'
     if(button(user.mouseX,user.mouseY,30,320,250,50)){
         
         ctx.fillStyle='rgb(150,150,150)'
@@ -7164,7 +7100,7 @@ scenes.title=function(){
             }
         }
     }
-    ctx.font='bold 35px cursive'
+    ctx.font='bold 35px trebuchet ms'
     coolText('Level Creator',40,450)
     
 }
@@ -7357,14 +7293,14 @@ scenes.levelSelect=function(){
     ctx.strokeStyle='rgb(255,0,0)'
     ctx.fillStyle='rgb(255,255,255)'
     
-    ctx.font='bold 30px cursive'
+    ctx.font='bold 30px trebuchet ms'
     ctx.textAlign='center'
     coolText('Level Select',300,50)
     ctx.strokeStyle='black'
-    ctx.font='bold 12px cursive'
+    ctx.font='bold 12px trebuchet ms'
     ctx.fillStyle='white'
     ctx.fillText('Press "B" to go back to the title screen',125,585)
-    ctx.font='bold 22px cursive'
+    ctx.font='bold 22px trebuchet ms'
     
     for(let i=0,l=levels.length;i<l;i++){
         
@@ -7408,7 +7344,7 @@ scenes.levelSelect=function(){
     ctx.fillStyle='rgb(200,200,200)'
     ctx.fillRect(5,5,85,55)
     ctx.strokeRect(5,5,85,55)
-    ctx.font='17px cursive'
+    ctx.font='17px trebuchet ms'
     ctx.fillStyle='black'
     ctx.fillText('Input',42.5,27)
     ctx.fillText('code',42.5,47)
@@ -7559,16 +7495,16 @@ scenes.options=function(){
     ctx.strokeStyle='rgb(255,0,0)'
     ctx.fillStyle='rgb(255,255,255)'
     
-    ctx.font='bold 42px cursive'
+    ctx.font='bold 42px trebuchet ms'
     ctx.textAlign='center'
     coolText('Options',300,50)
-    ctx.font='bold 15px cursive'
+    ctx.font='bold 15px trebuchet ms'
     ctx.fillStyle='white'
     ctx.fillText('Press "B" to go back to the title screen',150,590)
-    ctx.font='bold 12px cursive'
+    ctx.font='bold 12px trebuchet ms'
     ctx.fillText('(Advanced graphics required)',150,470-40)
     ctx.fillText('(Advanced graphics required)',450,290-40)
-    ctx.font='bold 27px cursive'
+    ctx.font='bold 27px trebuchet ms'
     ctx.fillText('Sensitivity',300,170-40)
     ctx.fillText('Screen Particles',150,275-40)
     ctx.fillText('Advanced Graphics',150,365-40)
@@ -7745,9 +7681,9 @@ scenes.options=function(){
     }
     
     
-    ctx.font='bold 25px cursive'
+    ctx.font='bold 25px trebuchet ms'
     ctx.fillText('Super Secret Settings',300,525)
-    ctx.font='13px cursive'
+    ctx.font='13px trebuchet ms'
     ctx.fillText('(Advanced graphics required)',300,540)
     
     if(user.keys.b){
@@ -7843,7 +7779,7 @@ scenes.play=function(){
             
             ctx.fillStyle=titleScreenVignetteGradient
             ctx.fillRect(0,0,600,600)
-            ctx.font='bold 50px cursive'
+            ctx.font='bold 50px trebuchet ms'
             ctx.strokeStyle='rgb(255,0,0)'
             ctx.lineWidth=3
             ctx.textAlign='center'
@@ -7942,13 +7878,13 @@ scenes.play=function(){
                 }
             }
             
-            ctx.font='bold 45px cursive'
+            ctx.font='bold 45px trebuchet ms'
             coolText('Main Menu',300,400)
-            ctx.font='27px cursive'
+            ctx.font='27px trebuchet ms'
             ctx.fillStyle='white'
             
             ctx.fillText(~~(0.00166666667*player.levelTime)+' : '+~~(0.1*player.levelTime)%60+' : '+~~(10*player.levelTime)%100,300,50)
-            ctx.font='20px cursive'
+            ctx.font='20px trebuchet ms'
         }
         
         return
@@ -7983,7 +7919,7 @@ scenes.play=function(){
         
         ctx.fillStyle=titleScreenVignetteGradient
         ctx.fillRect(0,0,600,600)
-        ctx.font='bold 50px cursive'
+        ctx.font='bold 50px trebuchet ms'
         ctx.strokeStyle='rgb(255,0,0)'
         ctx.lineWidth=3
         ctx.textAlign='center'
@@ -8080,9 +8016,9 @@ scenes.play=function(){
             }
         }
         
-        ctx.font='bold 45px cursive'
+        ctx.font='bold 45px trebuchet ms'
         coolText('Main Menu',300,400)
-        ctx.font='20px cursive'
+        ctx.font='20px trebuchet ms'
         
         return
     }
@@ -8380,7 +8316,7 @@ scenes.play=function(){
         
         ctx.fillStyle=titleScreenVignetteGradient
         ctx.fillRect(0,0,600,600)
-        ctx.font='bold 50px cursive'
+        ctx.font='bold 50px trebuchet ms'
         ctx.strokeStyle='rgb(255,0,0)'
         ctx.lineWidth=3
         ctx.textAlign='center'
@@ -8428,9 +8364,9 @@ scenes.play=function(){
             }
         }
         
-        ctx.font='bold 45px cursive'
+        ctx.font='bold 45px trebuchet ms'
         coolText('Main Menu',300,350)
-        ctx.font='20px cursive'
+        ctx.font='20px trebuchet ms'
         
         return
     }
@@ -8977,7 +8913,7 @@ scenes.levelCreator=function(){
     ctx.fillStyle='rgb(150,150,150)'
     ctx.fillRect(0,0,75,40)
     ctx.fillStyle='white'
-    ctx.font='20px cursive'
+    ctx.font='20px trebuchet ms'
     ctx.fillText('Save',35,25)
     if(user.mouseClicked && button(user.mouseX,user.mouseY,0,0,75,40)){
         printDataString4Scene()
@@ -8991,7 +8927,7 @@ scenes.levelCreator=function(){
     ctx.fillStyle='black'
     ctx.fillRect(298,298,4,4)
     
-    ctx.font='30px cursive'
+    ctx.font='30px trebuchet ms'
     ctx.fillStyle='rgb(255,255,255)'
     
     ctx.textAlign='center'
@@ -9002,13 +8938,13 @@ scenes.levelCreator=function(){
         ctx.fillText('Done',525,580)
         if(user.mouseClicked && button_center(user.mouseX,user.mouseY,525,580,120,50)){levelMade.selectedPart=null;return}
         
-        ctx.font='20px cursive'
+        ctx.font='20px trebuchet ms'
         ctx.fillStyle='black'
         ctx.fillText('Delete',40,590)
         if(user.mouseClicked && button(user.mouseX,user.mouseY,0,580,75,20)){levelMade.data.splice(levelMade.selectedPart,1);levelMade.selectedPart=null;return}
         
         ctx.fillStyle='rgb(255,255,255)'
-        ctx.font='25px cursive'
+        ctx.font='25px trebuchet ms'
         
         switch((part.partInfo?part.partInfo:{}).instance){
             
@@ -9022,7 +8958,7 @@ scenes.levelCreator=function(){
                         ctx.fillText('Rotation',525,140)
                         ctx.fillText('Scale',525,250)
                         ctx.fillText('Color',525,360)
-                        ctx.font='15px cursive'
+                        ctx.font='15px trebuchet ms'
                         
                         ctx.fillText('Use Texture',510,455)
                         
@@ -9073,7 +9009,7 @@ scenes.levelCreator=function(){
                         ctx.fillText('Position',525,30)
                         ctx.fillText('Rotation',525,140)
                         ctx.fillText('Scale',525,250)
-                        ctx.font='15px cursive'
+                        ctx.font='15px trebuchet ms'
                         
                         ctx.textAlign='start'
                         
@@ -9104,10 +9040,10 @@ scenes.levelCreator=function(){
                         
                         if(levelMade.pageOfParticleSystemData===0){
                             
-                            ctx.font='20px cursive'
+                            ctx.font='20px trebuchet ms'
                             ctx.fillText('Position',525,20)
                             ctx.fillText('Scale',525,110)
-                            ctx.font='13px cursive'
+                            ctx.font='13px trebuchet ms'
                             ctx.textAlign='start'
                             
                             ctx.fillText('X: '+part.pos[0].toFixed(2),485,40)
@@ -9172,7 +9108,7 @@ scenes.levelCreator=function(){
                         } else {
                             
                             ctx.textAlign='start'
-                            ctx.font='13px cursive'
+                            ctx.font='13px trebuchet ms'
                             
                             ctx.fillText('Min Life: '+part.particleSystemData.minLife.toFixed(2),475,20)
                             if(button_center(user.mouseX,user.mouseY,525,20,150,20)){levelMade.data[levelMade.selectedPart].particleSystemData.minLife=numberSlider(part.particleSystemData.minLife,-Infinity,Infinity,0.05)}
@@ -9214,7 +9150,7 @@ scenes.levelCreator=function(){
                     
                     case 'line':
                         
-                        ctx.font='13px cursive'
+                        ctx.font='13px trebuchet ms'
                         ctx.textAlign='start'
                         
                         ctx.fillText('X1: '+part.lineData.p1[0].toFixed(2),485,20)
@@ -9258,7 +9194,7 @@ scenes.levelCreator=function(){
                         ctx.fillText('Detail: '+part.lineData.detail,475,490)
                         if(user.mouseClicked && button_center(user.mouseX,user.mouseY,525,490,150,20)){levelMade.data[levelMade.selectedPart].lineData.detail=({Low:'Medium',Medium:'High',High:'Low'})[levelMade.data[levelMade.selectedPart].lineData.detail]}
                         
-                        ctx.font='16px cursive'
+                        ctx.font='16px trebuchet ms'
                         ctx.fillText('Copy',500,515)
                         if(user.mouseClicked && button_center(user.mouseX,user.mouseY,525,515,150,20)){levelMade.selectedPart=levelMade.data.length;levelMade.selectGlow=2;levelMade.data.push({render:false,pos:part.pos,size:part.size,rot:part.rot,col:part.col,special:part.special,lineData:{p1:part.lineData.p1.slice(),p2:part.lineData.p2.slice(),thickness1:part.lineData.thickness1,thickness2:part.lineData.thickness2,col1:part.lineData.col1.slice(),col2:part.lineData.col2.slice(),widthScale:part.lineData.widthScale,heightScale:part.lineData.heightScale,detail:part.lineData.detail}})}
                         
@@ -9272,7 +9208,7 @@ scenes.levelCreator=function(){
                 
                 ctx.fillText('Position',525,30)
                 ctx.fillText('Rotation',525,150)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 
                 ctx.textAlign='start'
                 
@@ -9292,7 +9228,7 @@ scenes.levelCreator=function(){
                 if(button_center(user.mouseX,user.mouseY,525,215,150,20)){levelMade.data[levelMade.selectedPart].rot[2]=numberSlider(part.rot[2],0,360,1)}
                 part.partInfo.rot=levelMade.data[levelMade.selectedPart].rot.slice()
                 
-                ctx.font='16px cursive'
+                ctx.font='16px trebuchet ms'
                 ctx.textAlign='center'
                 ctx.fillText('Type:',515,250)
                 ctx.fillText(MATH.getWeaponName(part.partInfo.type),525,270)
@@ -9305,7 +9241,7 @@ scenes.levelCreator=function(){
                 ctx.fillText('Position',525,30)
                 ctx.fillText('Rotation',525,150)
                 ctx.fillText('Scale',525,270)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 ctx.textAlign='start'
                 
                 ctx.fillText('X: '+part.pos[0].toFixed(2),485,65)
@@ -9332,7 +9268,7 @@ scenes.levelCreator=function(){
                 if(button_center(user.mouseX,user.mouseY,525,345,150,20)){levelMade.data[levelMade.selectedPart].size[2]=numberSlider(part.size[2],0,Infinity,0.05)}
                 part.partInfo.size=levelMade.data[levelMade.selectedPart].size.slice()
                 
-                ctx.font='16px cursive'
+                ctx.font='16px trebuchet ms'
                 ctx.fillText('Mass: '+part.partInfo.mass.toFixed(2),475,395)
                 if(button_center(user.mouseX,user.mouseY,525,395,150,20)){levelMade.data[levelMade.selectedPart].partInfo.mass=numberSlider(part.partInfo.mass,0,Infinity,0.02)}
                 
@@ -9341,7 +9277,7 @@ scenes.levelCreator=function(){
             case 'sphere':
                 
                 ctx.fillText('Position',525,30)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 ctx.textAlign='start'
                 
                 ctx.fillText('X: '+part.pos[0].toFixed(2),485,65)
@@ -9352,7 +9288,7 @@ scenes.levelCreator=function(){
                 if(button_center(user.mouseX,user.mouseY,525,105,150,20)){levelMade.data[levelMade.selectedPart].pos[2]=numberSlider(part.pos[2],-Infinity,Infinity,0.05)}
                 part.partInfo.pos=levelMade.data[levelMade.selectedPart].pos.slice()
                 
-                ctx.font='16px cursive'
+                ctx.font='16px trebuchet ms'
                 ctx.fillText('Radius: '+part.partInfo.radius.toFixed(2),475,145)
                 if(button_center(user.mouseX,user.mouseY,525,145,150,20)){levelMade.data[levelMade.selectedPart].partInfo.radius=numberSlider(part.partInfo.radius,0,Infinity,0.025)}
                 levelMade.data[levelMade.selectedPart].size[0]=levelMade.data[levelMade.selectedPart].partInfo.radius
@@ -9367,7 +9303,7 @@ scenes.levelCreator=function(){
             case 'enemy':
                 
                 ctx.fillText('Position',525,30)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 ctx.textAlign='start'
                 
                 ctx.fillText('X: '+part.pos[0].toFixed(2),485,65)
@@ -9378,7 +9314,7 @@ scenes.levelCreator=function(){
                 if(button_center(user.mouseX,user.mouseY,525,105,150,20)){levelMade.data[levelMade.selectedPart].pos[2]=numberSlider(part.pos[2],-Infinity,Infinity,0.05)}
                 part.partInfo.pos=levelMade.data[levelMade.selectedPart].pos.slice()
                 
-                ctx.font='16px cursive'
+                ctx.font='16px trebuchet ms'
                 ctx.textAlign='center'
                 ctx.fillText('Weapon:',507,250)
                 ctx.fillText(MATH.getWeaponName(part.partInfo.weapon),525,270)
@@ -9389,7 +9325,7 @@ scenes.levelCreator=function(){
             case 'barrel':
                 
                 ctx.fillText('Position',525,30)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 ctx.textAlign='start'
                 
                 ctx.fillText('X: '+part.pos[0].toFixed(2),485,65)
@@ -9413,9 +9349,9 @@ scenes.levelCreator=function(){
             case 'light':
                 
                 ctx.fillStyle='rgb(255,255,255)'
-                ctx.font='25px cursive'
+                ctx.font='25px trebuchet ms'
                 ctx.fillText('Position',525,30)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 ctx.textAlign='start'
                 
                 ctx.fillText('X: '+levelMade.lightPos[0].toFixed(2),485,55)
@@ -9430,9 +9366,9 @@ scenes.levelCreator=function(){
             case 'spawn':
                 
                 ctx.fillStyle='rgb(255,255,255)'
-                ctx.font='25px cursive'
+                ctx.font='25px trebuchet ms'
                 ctx.fillText('Position',525,30)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 ctx.textAlign='start'
                 
                 ctx.fillText('X: '+levelMade.spawnPos[0].toFixed(2),485,55)
@@ -9447,9 +9383,9 @@ scenes.levelCreator=function(){
             case 'milk':
                 
                 ctx.fillStyle='rgb(255,255,255)'
-                ctx.font='25px cursive'
+                ctx.font='25px trebuchet ms'
                 ctx.fillText('Position',525,30)
-                ctx.font='15px cursive'
+                ctx.font='15px trebuchet ms'
                 ctx.textAlign='start'
                 
                 ctx.fillText('X: '+levelMade.milk[0].toFixed(2),485,55)
@@ -9464,7 +9400,7 @@ scenes.levelCreator=function(){
         
     } else {
         
-        ctx.font='20px cursive'
+        ctx.font='20px trebuchet ms'
         
         ctx.fillText('Add Wall',525,35)
         if(user.mouseClicked && button_center(user.mouseX,user.mouseY,525,35,120,35)){
@@ -9581,7 +9517,7 @@ scenes.levelCreator=function(){
         
         ctx.fillStyle='white'
         ctx.textAlign='center'
-        ctx.font='17.5px cursive'
+        ctx.font='17.5px trebuchet ms'
         ctx.fillText('Select Part',525,545)
         if(user.mouseClicked && button_center(user.mouseX,user.mouseY,525,545,120,40)){
             
@@ -9612,10 +9548,10 @@ printDataString4Scene=function(){
     ctx.fillStyle='rgb(200,200,200)'
     ctx.fillRect(0,0,600,600)
     ctx.fillStyle='black'
-    ctx.font='16px cursive'
+    ctx.font='16px trebuchet ms'
     ctx.textAlign='start'
     ctx.fillText('Copy the save code                                press "B" to go back to the title screen',5,20)
-    ctx.font='13px cursive'
+    ctx.font='13px trebuchet ms'
     ctx.fillText('Press CTRL+A to highlight all of the code',5,50)
     
     documentLevelStringElement.style.display='block'
@@ -9662,17 +9598,122 @@ scenes.enterLevelData_creator=function(){
     }
 }
 
-if(width===600&&height===600&&!window.thisProgramIsInFullScreen){
+// if(!window.thisProgramIsInFullScreen){
     
     currentScene='enterFullScreen'
     fullScreenPage.style.display='block'
-}
+// }
 
 scenes.enterFullScreen=function(){
     
     ctx.fillStyle='rgb(80,80,80)'
     ctx.fillRect(0,0,600,600)
 }
+
+window.onresize=function(){
+    
+    width=window.innerWidth
+    height=window.innerHeight
+    aspect=width/height
+    half_width=width*0.5
+    half_height=height*0.5
+    
+    glCanvas.width=width
+    glCanvas.height=height
+    uiCanvas.width=width
+    uiCanvas.height=height
+    
+    gl.canvas.width=width
+    gl.canvas.height=height
+    
+    ctx.setTransform(width/600,0,0,height/600,0,0)
+    
+    gl.viewport(0,0,width,height)
+    
+    player.setProjectionMatrix(player.fov,aspect,player.near,player.far)
+    
+    staticGeometryProgram=createProgram('static_geometry_vsh','static_geometry_fsh')
+    dynamicGeometryProgram=createProgram('dynamic_geometry_vsh','dynamic_geometry_fsh')
+    lineRendererProgram=createProgram('line_renderer_vsh','line_renderer_fsh')
+    weaponRendererProgram=createProgram('weapon_renderer_vsh','weapon_renderer_fsh')
+    boardGeometryProgram=createProgram('board_geometry_vsh','board_geometry_fsh')
+    particleRendererProgram=createProgram('particle_renderer_vsh','particle_renderer_fsh')
+    
+    bloomFilterProgram=createProgram('postprocessing_vsh','bloom_filter_fsh')
+    bloomBlurHorProgram=createProgram('postprocessing_vsh','bloom_blur_hor_fsh')
+    bloomBlurVerProgram=createProgram('postprocessing_vsh','bloom_blur_ver_fsh')
+    bloomCombineProgram=createProgram(superSecretShaders[currentSuperSecretShader])
+    skyRendererProgram=createProgram('sky_renderer_vsh','sky_renderer_fsh')
+    sunRayProgram=createProgram('postprocessing_vsh','sunray_fsh')
+    ssaoProgram=createProgram('postprocessing_vsh','ssao_fsh')
+    fxaaProgram=createProgram('postprocessing_vsh','fxaa_fsh')
+    
+    initGLCache()
+    
+    og_tex_color=createNullTexture()
+    og_tex_info=createNullTexture()
+    og_tex_normal=createNullTexture()
+    
+    sunray_tex=createNullTexture()
+    sunray_fb=createFramebufferTexture(sunray_tex)
+    filtered_tex=createNullTexture()
+    filtered_fb=createFramebufferTexture(filtered_tex)
+    blurred_hor_tex=createNullTexture()
+    blurred_hor_fb=createFramebufferTexture(blurred_hor_tex)
+    blurred_ver_tex=createNullTexture()
+    blurred_ver_fb=createFramebufferTexture(blurred_ver_tex)
+    ssao_tex=createNullTexture()
+    ssao_fb=createFramebufferTexture(ssao_tex)
+    fxaa_tex=createNullTexture()
+    fxaa_fb=createFramebufferTexture(fxaa_tex)
+    
+    empty_ssao_normal_tex=createNullTexture()
+    
+    og_fb=gl.createFramebuffer()
+    
+    gl.bindFramebuffer(gl.FRAMEBUFFER,og_fb)
+    
+    depthBuffer=gl.createRenderbuffer()
+    gl.bindRenderbuffer(gl.RENDERBUFFER,depthBuffer)
+    gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT16,width,height)
+    gl.framebufferRenderbuffer(gl.FRAMEBUFFER,gl.DEPTH_ATTACHMENT,gl.RENDERBUFFER,depthBuffer)
+    
+    gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,og_tex_color,0)
+    gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER,gl.COLOR_ATTACHMENT1,gl.TEXTURE_2D,og_tex_info,0)
+    gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER,gl.COLOR_ATTACHMENT2,gl.TEXTURE_2D,og_tex_normal,0)
+    
+    gl.drawBuffers([gl.COLOR_ATTACHMENT0,gl.COLOR_ATTACHMENT1,gl.COLOR_ATTACHMENT2])
+    
+    gl.bindFramebuffer(gl.FRAMEBUFFER,null)
+    
+    
+}
+
+document.getElementById('runFullScreen').addEventListener('click',function(){
+    
+    let w=window.open()
+    w.document.open()
+    w.document.write(('<!doctype html><html>'+document.querySelector('html').innerHTML+'</html>').replace('var _M=Math','var _M=Math\nwindow.thisProgramIsInFullScreen=true'))
+    w.document.close()
+    
+})
+
+document.getElementById('noFullScreen').addEventListener('click',function(){
+    
+    ctx.textAlign='start'
+    fullScreenPage.style.display='none'
+    currentScene='title'
+    initTitleScreen()
+    
+})
+
+// if(window.thisProgramIsInFullScreen){
+    
+//     ctx.textAlign='start'
+//     fullScreenPage.style.display='none'
+//     currentScene='title'
+//     initTitleScreen()
+// }
 
 let then
 function loop(now){
@@ -9709,10 +9750,9 @@ loop()
 
 }
 
-Karlson()
-
 
 </script>
 
+</body>
 
 </html>
