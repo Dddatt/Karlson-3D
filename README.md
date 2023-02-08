@@ -7,5 +7,7 @@ A remake of Dani's Karlson 3D, used to be on KA but was too violent for the litt
 This repo is a backup
 
 First version: https://dddatt.github.io/Karlson-3D/beforeChristmasUpdate.html
-Christmas version: https://dddatt.github.io/Karlson-3D/currentChristmasUpdate.html
-Latest version: https://dddatt.github.io/Karlson-3D/afterChristmas.html
+<br>Christmas version: https://dddatt.github.io/Karlson-3D/currentChristmasUpdate.html
+<br>Latest version: https://dddatt.github.io/Karlson-3D/afterChristmas.html
+<br><br>
+also theres a big file for the base64 of the bomb sound from my bss that is unused
