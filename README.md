@@ -1,4 +1,8 @@
-BAHAHHAHAHAHA<br>
+so for some reason theres tons of karlson ripoffs on the hl recently so i made a program of the christmas update on my alt but then it was hidden but whats funny is that there is still a few STILL on the hl after like half an hour after mine got hidden
+![image](https://user-images.githubusercontent.com/115298848/217662617-668ae94a-0ea0-460e-9215-9dd530c81375.png)
+
+
+BAHAHHAHAHAHA(this was old)<br>
 ![image](https://user-images.githubusercontent.com/115298848/213750094-fdaef4a8-0101-4106-93ad-a24724c2ed4e.png)
 
 
