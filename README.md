@@ -3,8 +3,9 @@ BAHAHHAHAHAHA<br>
 
 
 # Karlson-3D
-A remake of Dani's Karlson 3D, hosted on KA<br>
-This repo is a backup sorta
+A remake of Dani's Karlson 3D, used to be on KA but was too violent for the little children<br>
+This repo is a backup
 
-KA link: https://www.khanacademy.org/computer-programming/karlson-3d/6419382501687296<br>
+First version: https://dddatt.github.io/Karlson-3D/beforeChristmasUpdate.html
 Christmas version: https://dddatt.github.io/Karlson-3D/currentChristmasUpdate.html
+Latest version: https://dddatt.github.io/Karlson-3D/afterChristmas.html
