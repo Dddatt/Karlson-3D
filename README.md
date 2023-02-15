@@ -1,6 +1,4 @@
-so for some reason theres tons of karlson ripoffs on the hl recently so i made a program of the christmas update on my alt but then it was hidden but whats funny is that there is still a few STILL on the hl after like half an hour after mine got hidden<br>(it also had a grammar mistake lol)<br>
-![image](https://user-images.githubusercontent.com/115298848/217663452-1cddff22-f1c0-471b-926a-71a7ac0fa1e5.png)
-
+i might update this game and find a way to release it again after bss
 
 
 <br>BAHAHHAHAHAHA(this was old)<br>
