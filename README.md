@@ -13,4 +13,6 @@ First version: https://dddatt.github.io/Karlson-3D/beforeChristmasUpdate.html
 <br>Christmas version: https://dddatt.github.io/Karlson-3D/currentChristmasUpdate.html
 <br>Latest version: https://dddatt.github.io/Karlson-3D/afterChristmas.html
 <br><br>
+<br>Kids version: https://dddatt.github.io/Karlson-3D/forKids.html
+<br><br>
 also theres a big file for the base64 of the bomb sound from my bss that is unused
